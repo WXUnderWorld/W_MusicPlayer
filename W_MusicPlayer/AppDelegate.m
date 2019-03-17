@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "MainTabBarController.h"
+#import "MusicViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -20,8 +21,9 @@
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [UIApplication sharedApplication].statusBarStyle =  UIStatusBarStyleDefault;
-    MainTabBarController *main = [[MainTabBarController alloc] init];
-    self.window.rootViewController = main;
+    MusicViewController *vc = [[MusicViewController alloc] init];
+    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nv;
     
     [self.window makeKeyAndVisible];
     

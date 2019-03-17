@@ -21,16 +21,42 @@
 
 @implementation MusicViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated];
+    [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor],NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:17]}];
+    self.navigationController.navigationBar.tintColor = [UIColor lightGrayColor];
+    
+}
+
+
+
+// 根据颜色生成UIImage
+- (UIImage*)imageWithColor:(UIColor*)color{
+    
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    // 开始画图的上下文
+    UIGraphicsBeginImageContext(rect.size);
+    
+    // 设置背景颜色
+    [color set];
+    // 设置填充区域
+    UIRectFill(CGRectMake(0, 0, rect.size.width, rect.size.height));
+    
+    // 返回UIImage
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    // 结束上下文
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:17]}];
-    self.navigationController.navigationBar.tintColor = [UIColor lightGrayColor];
-    
+    self.title = @"音乐";
     
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, ScreenH) style:UITableViewStylePlain];

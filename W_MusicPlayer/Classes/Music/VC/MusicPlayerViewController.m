@@ -22,6 +22,11 @@
 {
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle =  UIStatusBarStyleLightContent;
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:17]}];
+    self.navigationController.navigationBar.tintColor = [UIColor lightGrayColor];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

@@ -23,10 +23,7 @@
 		9B40D425223A2420000DA23C /* MusicLrcLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B40D424223A2420000DA23C /* MusicLrcLabel.m */; };
 		9B40D429223A2553000DA23C /* LrcTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B40D427223A2553000DA23C /* LrcTableViewCell.m */; };
 		9B40D42A223A2553000DA23C /* LrcTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B40D428223A2553000DA23C /* LrcTableViewCell.xib */; };
-		9B479F142236007600588A6E /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B479F132236007600588A6E /* MainTabBarController.m */; };
-		9B479F202236039E00588A6E /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B479F1F2236039E00588A6E /* VideoViewController.m */; };
 		9B479F23223603B900588A6E /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B479F22223603B900588A6E /* MusicViewController.m */; };
-		9B479F26223603C400588A6E /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B479F25223603C400588A6E /* MyViewController.m */; };
 		9B479F2922360E0500588A6E /* MusicPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B479F2822360E0500588A6E /* MusicPlayerViewController.m */; };
 		9B479F452236505000588A6E /* AudioData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B479F2B2236505000588A6E /* AudioData.plist */; };
 		9B479F462236505000588A6E /* 王若琳-迷宫.lrc in Resources */ = {isa = PBXBuildFile; fileRef = 9B479F2D2236505000588A6E /* 王若琳-迷宫.lrc */; };
@@ -83,14 +80,8 @@
 		9B40D426223A2553000DA23C /* LrcTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LrcTableViewCell.h; sourceTree = "<group>"; };
 		9B40D427223A2553000DA23C /* LrcTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LrcTableViewCell.m; sourceTree = "<group>"; };
 		9B40D428223A2553000DA23C /* LrcTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LrcTableViewCell.xib; sourceTree = "<group>"; };
-		9B479F122236007600588A6E /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
-		9B479F132236007600588A6E /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
-		9B479F1E2236039E00588A6E /* VideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
-		9B479F1F2236039E00588A6E /* VideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		9B479F21223603B900588A6E /* MusicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicViewController.h; sourceTree = "<group>"; };
 		9B479F22223603B900588A6E /* MusicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicViewController.m; sourceTree = "<group>"; };
-		9B479F24223603C400588A6E /* MyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
-		9B479F25223603C400588A6E /* MyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		9B479F2722360E0500588A6E /* MusicPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicPlayerViewController.h; sourceTree = "<group>"; };
 		9B479F2822360E0500588A6E /* MusicPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicPlayerViewController.m; sourceTree = "<group>"; };
 		9B479F2B2236505000588A6E /* AudioData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AudioData.plist; sourceTree = "<group>"; };
@@ -168,22 +159,6 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		9B016371223B365500E3A80B /* VIew */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = VIew;
-			sourceTree = "<group>";
-		};
-		9B016372223B366400E3A80B /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				9B479F122236007600588A6E /* MainTabBarController.h */,
-				9B479F132236007600588A6E /* MainTabBarController.m */,
-			);
-			path = VC;
-			sourceTree = "<group>";
-		};
 		9B3E08EF223BAAA7002E2A5F /* Gif */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,36 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				9B479F17223602FA00588A6E /* Music */,
-				9B479F16223602E800588A6E /* Video */,
-				9B479F152236029E00588A6E /* My */,
-				9B479F112236004100588A6E /* Main */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		9B479F112236004100588A6E /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				9B016372223B366400E3A80B /* VC */,
-				9B016371223B365500E3A80B /* VIew */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		9B479F152236029E00588A6E /* My */ = {
-			isa = PBXGroup;
-			children = (
-				9B479F1A2236035400588A6E /* VC */,
-			);
-			path = My;
-			sourceTree = "<group>";
-		};
-		9B479F16223602E800588A6E /* Video */ = {
-			isa = PBXGroup;
-			children = (
-				9B479F192236035100588A6E /* VC */,
-			);
-			path = Video;
 			sourceTree = "<group>";
 		};
 		9B479F17223602FA00588A6E /* Music */ = {
@@ -246,24 +193,6 @@
 				9B479F22223603B900588A6E /* MusicViewController.m */,
 				9B479F2722360E0500588A6E /* MusicPlayerViewController.h */,
 				9B479F2822360E0500588A6E /* MusicPlayerViewController.m */,
-			);
-			path = VC;
-			sourceTree = "<group>";
-		};
-		9B479F192236035100588A6E /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				9B479F1E2236039E00588A6E /* VideoViewController.h */,
-				9B479F1F2236039E00588A6E /* VideoViewController.m */,
-			);
-			path = VC;
-			sourceTree = "<group>";
-		};
-		9B479F1A2236035400588A6E /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				9B479F24223603C400588A6E /* MyViewController.h */,
-				9B479F25223603C400588A6E /* MyViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -526,17 +455,14 @@
 				9B40D429223A2553000DA23C /* LrcTableViewCell.m in Sources */,
 				9B40D425223A2420000DA23C /* MusicLrcLabel.m in Sources */,
 				9B479F602236541000588A6E /* MusicListModel.m in Sources */,
-				9B479F26223603C400588A6E /* MyViewController.m in Sources */,
 				9B1BFB692238F19A00414B19 /* MusicImageView.m in Sources */,
 				9B5305CE2237A300008D0BCF /* PlayerBackgroundView.m in Sources */,
 				9B40D41F223A0048000DA23C /* LrcView.m in Sources */,
-				9B479F202236039E00588A6E /* VideoViewController.m in Sources */,
 				9B5305CA2237840C008D0BCF /* MusicManager.m in Sources */,
 				9B479F23223603B900588A6E /* MusicViewController.m in Sources */,
 				9B40D422223A0167000DA23C /* MusicLrcModel.m in Sources */,
 				9B5C01562232612B00FC8015 /* main.m in Sources */,
 				9B5C01482232612900FC8015 /* AppDelegate.m in Sources */,
-				9B479F142236007600588A6E /* MainTabBarController.m in Sources */,
 				9B40D41A2239EEA4000DA23C /* PlayScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
