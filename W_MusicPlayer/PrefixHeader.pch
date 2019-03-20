@@ -11,7 +11,6 @@
 
 #define ScreenW [UIScreen mainScreen].bounds.size.width
 #define ScreenH [UIScreen mainScreen].bounds.size.height
-
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #endif /* PrefixHeader_pch */

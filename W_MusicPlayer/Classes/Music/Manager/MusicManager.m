@@ -9,10 +9,6 @@
 #import "MusicManager.h"
 #import "MusicListModel.h"
 
-@interface MusicManager ()
-@property (nonatomic,assign) CGFloat current_Time;
-@end
-
 @implementation MusicManager
 
 + (instancetype)shareManager
@@ -21,6 +17,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _manager = [[MusicManager alloc] init];
+        _manager.currentIndex = -1;
     });
     return _manager;
 }
@@ -68,21 +65,26 @@
         CGFloat total = CMTimeGetSeconds(item.duration);
         //当前播放时间
         CGFloat currentTime = item.currentTime.value/item.currentTime.timescale;
-        if ((NSInteger)weakSelf.current_Time == (NSInteger)currentTime) {
-            weakSelf.current_Time += 0.1;
+        if ((NSInteger)weakSelf.currentPlayTime == (NSInteger)currentTime) {
+            weakSelf.currentPlayTime += 0.1;
         }else{
-            weakSelf.current_Time = currentTime;
+            weakSelf.currentPlayTime = currentTime;
         }
+        
         if (currentTime) {
             //更新播放进度
+            weakSelf.playProgress = weakSelf.currentPlayTime/total;
+            weakSelf.startTime = [weakSelf changeStringForTime:currentTime];
             if ([weakSelf.delegate respondsToSelector:@selector(updateProgress:currentTime:startTime:)]) {
-                [weakSelf.delegate updateProgress:weakSelf.current_Time/total currentTime:weakSelf.current_Time startTime:[weakSelf changeStringForTime:currentTime]];
+                [weakSelf.delegate updateProgress:weakSelf.playProgress currentTime:weakSelf.currentPlayTime startTime:weakSelf.startTime];
             }
             
             //监测播放状态；暂停、播放中
             if ([weakSelf.delegate respondsToSelector:@selector(playerPlayingState:)]) {
                 [weakSelf.delegate playerPlayingState:(NSInteger)weakSelf.musicPlayer.rate];
             }
+            
+            weakSelf.isPause = (NSInteger)weakSelf.musicPlayer.rate;
         }
         
     }];
@@ -127,13 +129,13 @@
                 break;
             case AVPlayerItemStatusFailed:
             {
-                NSLog(@"加载失败:%@",self.playingName);
+                NSLog(@"加载失败:%@",self.currentPlayData);
                 [self playNext];
             }
                 break;
             case AVPlayerItemStatusUnknown:
             {
-                NSLog(@"未知资源:%@",self.playingName);
+                NSLog(@"未知资源:%@",self.currentPlayData);
                 [self playNext];
             }
                 break;
@@ -147,9 +149,14 @@
         NSTimeInterval totalBuffer = CMTimeGetSeconds(timeRange.start) + CMTimeGetSeconds(timeRange.duration);
         NSTimeInterval duration = CMTimeGetSeconds(playerItem.duration);
         CGFloat loadProgress = totalBuffer/duration;
+        _musicDuration = duration;
+        _loadProgress = loadProgress;
+        _endTime = [self changeStringForTime:duration];
         //加载进度
-        if ([self.delegate respondsToSelector:@selector(updateLoadProgress:duration:totalTime:)]) {
-            [self.delegate updateLoadProgress:loadProgress duration:duration totalTime:[self changeStringForTime:duration]];
+        if (loadProgress) {
+            if ([self.delegate respondsToSelector:@selector(updateLoadProgress:duration:totalTime:)]) {
+                [self.delegate updateLoadProgress:loadProgress duration:duration totalTime:_endTime];
+            }
         }
         
     }else{
@@ -191,23 +198,17 @@
     [self startPlayWithUrl:[NSURL URLWithString:model.audioUrl]];
 }
 
-- (NSString *)playingName
+
+//获取当前播放的资源详情
+- (id)currentPlayData
 {
     if (_musicArray.count) {
         MusicListModel *model = _musicArray[_currentIndex];
-        return model.audioName;
+        return model;
     }
-    return @"";
+    return nil;
 }
 
-- (NSString *)musciLrc
-{
-    if (_musicArray.count) {
-        MusicListModel *model = _musicArray[_currentIndex];
-        return model.audioLyric;
-    }
-    return @"暂无歌词";
-}
 
 - (void)removeObservers
 {

@@ -27,7 +27,7 @@
         _musicImgView = [[MusicImageView alloc] initWithFrame:self.bounds];
         [self addSubview:_musicImgView];
         
-        _musicLrcView = [[LrcView alloc] initWithFrame:CGRectMake(ScreenW, 80, ScreenW, self.bounds.size.height-100)];
+        _musicLrcView = [[LrcView alloc] initWithFrame:CGRectMake(ScreenW, 84, ScreenW, self.bounds.size.height-100)];
         [self addSubview:_musicLrcView];
         
     }

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol PlayerSliderDelegate <NSObject>
+@protocol PlayerMaxViewDelegate <NSObject>
 
 - (void)changeSliderValue:(CGFloat)value;
 
@@ -20,28 +20,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)playPrevious;
 
+- (void)dissmiss;
+
 @end
 
-@interface PlayerBackgroundView : UIView
+@interface PlayerMaxView : UIView
 
-@property (nonatomic,weak) id <PlayerSliderDelegate> delegate;
+@property (nonatomic,weak) id <PlayerMaxViewDelegate> delegate;
 
+@property (nonatomic,strong) UILabel *titleLab;
 @property (nonatomic,strong) UIButton *playerBtn;
 @property (nonatomic,assign) CGFloat loadProgress;
 @property (nonatomic,assign) CGFloat playProgress;
 @property (nonatomic,strong) UILabel *startTime;
 @property (nonatomic,strong) UILabel *endTime;
-//专辑图片
 @property (nonatomic,strong) NSString *musicImageUrl;
-//播放、暂停
 @property (nonatomic,assign) BOOL isPlaying;
-//歌词数据
 @property (nonatomic,strong) NSArray *musicLrcArray;
-
 @property (nonatomic,assign) NSTimeInterval currentPlayTime;
 @property (nonatomic,assign) NSTimeInterval playerDuration;
-
-
 
 //重置进度条
 - (void)resetProgress;

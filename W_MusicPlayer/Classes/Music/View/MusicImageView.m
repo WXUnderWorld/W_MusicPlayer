@@ -7,8 +7,7 @@
 //
 
 #import "MusicImageView.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-
+#import "AnimationManager.h"
 @interface MusicImageView ()
 
 @property (nonatomic,strong) UIImageView *audioImageView;
@@ -22,6 +21,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         [self setupSubViews];
+        [self startAnimation];
     }
     return self;
 }
@@ -38,7 +38,7 @@
     UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:_audioImageView.frame];
     _shapeLayer = [[CAShapeLayer alloc] init];
     _shapeLayer.path = path.CGPath;
-    _shapeLayer.fillColor = [UIColor redColor].CGColor;
+    _shapeLayer.fillColor = [UIColor clearColor].CGColor;
     _shapeLayer.strokeColor = [UIColor colorWithWhite:0.1 alpha:0.9].CGColor;
     _shapeLayer.lineWidth = 15;
     [self.layer addSublayer:_shapeLayer];
@@ -57,33 +57,22 @@
 
 - (void)startAnimation
 {
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    animation.fromValue = @(0);
-    animation.toValue = @(M_PI*2);
-    animation.duration = 20;
-    animation.repeatCount = MAXFLOAT;
-    animation.fillMode = kCAFillModeForwards;
-    animation.removedOnCompletion = NO;
-    [_audioImageView.layer addAnimation:animation forKey:@"transform.rotation.z"];
+    [AnimationManager startAnimation:_audioImageView.layer];
 }
-
 
 // 暂停旋转
 - (void)pauseAnimation
 {
-    CFTimeInterval pausedTime = [_audioImageView.layer convertTime:CACurrentMediaTime() fromLayer:nil];
-    _audioImageView.layer.speed = 0.0;
-    _audioImageView.layer.timeOffset = pausedTime;
+    [AnimationManager pauseAnimation:_audioImageView.layer];
 }
 
 - (void)continueAnimation
 {
-    CFTimeInterval pausedTime = _audioImageView.layer.timeOffset;
-    _audioImageView.layer.speed = 1.0;
-    _audioImageView.layer.timeOffset = 0.0;
-    _audioImageView.layer.beginTime = 0.0;
-    CFTimeInterval timeSincePause = [_audioImageView.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
-    _audioImageView.layer.beginTime = timeSincePause;  // 从暂停的时间点开始旋转
+    [AnimationManager continueAnimation:_audioImageView.layer];
 }
+
+
+
+
 
 @end

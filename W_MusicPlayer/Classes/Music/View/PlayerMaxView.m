@@ -6,44 +6,41 @@
 //  Copyright © 2019年 wxl. All rights reserved.
 //
 
-#import "PlayerBackgroundView.h"
+#import "PlayerMaxView.h"
 #import "PlayScrollView.h"
-@interface PlayerBackgroundView ()<UIScrollViewDelegate>
+#import "ShakeView.h"
 
+@interface PlayerMaxView ()<UIScrollViewDelegate>
+
+@property (nonatomic,strong) UIImageView *bgImgView;
 @property (nonatomic,strong) UISlider *playSlider;//播放进度
 @property (nonatomic,strong) PlayScrollView *scrollView;
 @property (nonatomic,strong) UISlider *loadSlider;//加载进度
 @property (nonatomic,strong) UIPageControl *pageControl;
+@property (nonatomic,strong) UIButton *backBtn;
+@property (nonatomic,strong) ShakeView *shakeView;
 
 
 @end
 
 
-@implementation PlayerBackgroundView
+@implementation PlayerMaxView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
+        [self addSubview:self.bgImgView];
+        [self addSubview:self.titleLab];
         [self setupUI];
         [self addSubview:self.scrollView];
         [self addSubview:self.pageControl];
+        [self addSubview:self.backBtn];
+        [self addSubview:self.shakeView];
     }
     return self;
 }
 
 - (void)setupUI{
-    
-    UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:self.bounds];
-    bgImgView.userInteractionEnabled = YES;
-    bgImgView.image = [UIImage imageNamed:@"bgplay.jpg"];
-    [self addSubview:bgImgView];
-    
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithFrame:bgImgView.bounds];
-    effectView.effect = blur;
-    effectView.alpha = 0.9;
-    [bgImgView addSubview:effectView];
-    
     
     _playerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _playerBtn.frame = CGRectMake(ScreenW/2-30, self.bounds.size.height - 120, 60, 60);
@@ -106,6 +103,11 @@
     
 }
 
+
+
+
+
+
 //拖拽进度条
 - (void)sliderChange:(UISlider *)slider
 {
@@ -129,8 +131,10 @@
     
     if (btn.selected) {
         [_scrollView continueAnimation];
+        [_shakeView continueAnimation];
     }else{
         [_scrollView pauseAnimation];
+        [_shakeView pauseAnimation];
     }
     
 }
@@ -189,7 +193,6 @@
 {
     _musicImageUrl = musicImageUrl;
     _scrollView.imageUrl = _musicImageUrl;
-    [_scrollView startAnimation];
 }
 
 //歌词数组
@@ -205,6 +208,7 @@
 {
     _isPlaying = isPlaying;
     self.playerBtn.selected = isPlaying;
+    
 }
 
 
@@ -221,6 +225,12 @@
 }
 
 
+- (void)dismissAction
+{
+    if ([self.delegate respondsToSelector:@selector(dissmiss)]) {
+        [self.delegate dissmiss];
+    }
+}
 
 
 
@@ -230,7 +240,7 @@
     self.pageControl.currentPage = x;
 }
 
--(UIScrollView *)scrollView
+- (UIScrollView *)scrollView
 {
     if (!_scrollView) {
         _scrollView = [[PlayScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenW, _playSlider.frame.origin.y - 60)];
@@ -252,6 +262,56 @@
         _pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     }
     return _pageControl;
+}
+
+- (UIButton *)backBtn
+{
+    if (!_backBtn) {
+        UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        backBtn.frame = CGRectMake(15, 20, 44, 44);
+        [backBtn setImage:[UIImage imageNamed:@"jiantou_xia"] forState:UIControlStateNormal];
+        [backBtn addTarget:self action:@selector(dismissAction) forControlEvents:UIControlEventTouchUpInside];
+        _backBtn = backBtn;
+    }
+    return _backBtn;
+}
+
+- (UIImageView *)bgImgView
+{
+    if (!_bgImgView) {
+        UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:self.bounds];
+        bgImgView.userInteractionEnabled = YES;
+        bgImgView.image = [UIImage imageNamed:@"bgplay.jpg"];
+        _bgImgView = bgImgView;
+        
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithFrame:bgImgView.bounds];
+        effectView.effect = blur;
+        effectView.alpha = 0.9;
+        [bgImgView addSubview:effectView];
+    }
+    return _bgImgView;
+}
+
+- (UILabel *)titleLab
+{
+    if (!_titleLab) {
+        _titleLab = [[UILabel alloc] init];
+        _titleLab.frame = CGRectMake(80, 20, ScreenW-160, 44);
+        _titleLab.textColor = [UIColor whiteColor];
+        _titleLab.font = [UIFont boldSystemFontOfSize:17];
+        _titleLab.textAlignment = NSTextAlignmentCenter;
+    }
+    return _titleLab;
+}
+
+
+- (ShakeView *)shakeView
+{
+    if (!_shakeView) {
+        _shakeView = [[ShakeView alloc] initWithFrame:CGRectMake(ScreenW-60, 20, 60, 44)];
+    }
+    return _shakeView;
 }
 
 @end

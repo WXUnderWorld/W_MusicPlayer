@@ -55,19 +55,24 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _lrcArray.count;
+    return _lrcArray.count?_lrcArray.count:1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LrcTableViewCell *cell = [LrcTableViewCell lrcCellWithTableView:tableView];
-    MusicLrcModel *model = self.lrcArray[indexPath.row];
-    cell.lrcLabel.text = model.lrcText;
-    if (indexPath.row == self.currentIndex) {
-        cell.selected = YES;
+    if (_lrcArray.count) {
+        MusicLrcModel *model = self.lrcArray[indexPath.row];
+        cell.lrcLabel.text = model.lrcText;
+        if (indexPath.row == self.currentIndex) {
+            cell.selected = YES;
+        }else{
+            cell.selected = NO;
+        }
     }else{
-        cell.selected = NO;
+        cell.lrcLabel.text = @"暂无歌词";
     }
+    
     return cell;
 }
 

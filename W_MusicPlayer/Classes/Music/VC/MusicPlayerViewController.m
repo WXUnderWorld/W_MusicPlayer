@@ -8,11 +8,12 @@
 
 #import "MusicPlayerViewController.h"
 #import "MusicManager.h"
-#import "PlayerBackgroundView.h"
+#import "PlayerMaxView.h"
 #import "MusicLrcModel.h"
-@interface MusicPlayerViewController ()<MusicManagerDelegate,PlayerSliderDelegate>
 
-@property (nonatomic,strong) PlayerBackgroundView *groundView;
+@interface MusicPlayerViewController ()<MusicManagerDelegate,PlayerMaxViewDelegate>
+
+@property (nonatomic,strong) PlayerMaxView *maxView;
 
 @end
 
@@ -22,11 +23,6 @@
 {
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle =  UIStatusBarStyleLightContent;
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],NSFontAttributeName : [UIFont fontWithName:@"Helvetica-Bold" size:17]}];
-    self.navigationController.navigationBar.tintColor = [UIColor lightGrayColor];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -38,59 +34,76 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    _groundView = [[PlayerBackgroundView alloc] initWithFrame:self.view.bounds];
-    _groundView.delegate = self;
-    [self.view addSubview:_groundView];
+    _maxView = [[PlayerMaxView alloc] initWithFrame:self.view.bounds];
+    _maxView.delegate = self;
+    [self.view addSubview:_maxView];
     
-    [MusicManager shareManager].delegate = self;
-    [MusicManager shareManager].musicArray = _listArray;
-    [MusicManager shareManager].currentIndex = _currentIndex;
-    
-    NSString *aduioUrl = [self.listModel.audioUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [[MusicManager shareManager] startPlayWithUrl:[NSURL URLWithString:aduioUrl]];
-    
+    MusicManager *playerManager = [MusicManager shareManager];
+    playerManager.delegate = self;
+    playerManager.musicArray = _listArray;
+    if (playerManager.currentIndex != _currentIndex) {
+        playerManager.currentIndex = _currentIndex;
+        NSString *aduioUrl = [self.listModel.audioUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        [playerManager startPlayWithUrl:[NSURL URLWithString:aduioUrl]];
+    }else{
+        //如果是当前播放歌曲
+        [self playerCurrentPlayData:playerManager.currentPlayData];
+        [self updateLoadProgress:playerManager.loadProgress duration:playerManager.musicDuration totalTime:playerManager.endTime];
+        [self updateProgress:playerManager.playProgress currentTime:playerManager.currentPlayTime startTime:playerManager.startTime];
+        [self playerPlayingState:playerManager.isPause];
+    }
 }
 
 #pragma mark---- MusicManagerDelegate
 //播放进度
-- (void)updateProgress:(CGFloat)progress currentTime:(NSTimeInterval)currentTime startTime:(NSString *)startTime
+- (void)updateProgress:(CGFloat)progress
+           currentTime:(NSTimeInterval)currentTime
+             startTime:(NSString *)startTime
 {
-    _groundView.playProgress = progress;
-    _groundView.startTime.text = startTime;
-    _groundView.currentPlayTime = currentTime;
+    _maxView.playProgress = progress;
+    _maxView.startTime.text = startTime;
+    _maxView.currentPlayTime = currentTime;
 }
 //加载进度
-- (void)updateLoadProgress:(CGFloat)progress duration:(NSTimeInterval)duration totalTime:(NSString *)totalTime
+- (void)updateLoadProgress:(CGFloat)progress
+                  duration:(NSTimeInterval)duration
+                 totalTime:(NSString *)totalTime
 {
-    _groundView.loadProgress = progress;
-    _groundView.endTime.text = totalTime;
-    _groundView.playerDuration = duration;
-}
-
-//是否正在播放
-- (void)playerPlayingState:(BOOL)state
-{
-    _groundView.isPlaying = state;
-}
-
-//播放完成
-- (void)playerPlayFinished
-{
-    [_groundView resetProgress];
+    _maxView.loadProgress = progress;
+    _maxView.endTime.text = totalTime;
+    _maxView.playerDuration = duration;
 }
 
 //当前播放的资源信息
 - (void)playerCurrentPlayData:(id)musicData
 {
     MusicListModel *model = musicData;
-    self.title = model.audioName;
-    _groundView.musicImageUrl = model.audioImage;
-    _groundView.musicLrcArray = [MusicLrcModel musicLrcListWithFileName:model.audioLyric];
+    _maxView.titleLab.text = model.audioName;
+    _maxView.musicImageUrl = model.audioImage;
+    _maxView.musicLrcArray = [MusicLrcModel musicLrcListWithFileName:model.audioLyric];
+}
+
+
+//是否正在播放
+- (void)playerPlayingState:(BOOL)state{
+    _maxView.isPlaying = state;
+}
+
+//播放完成
+- (void)playerPlayFinished{
+    [_maxView resetProgress];
 }
 
 
 
-#pragma mark---- PlayerSliderDelegate
+
+
+
+
+
+
+
+#pragma mark---- PlayerMaxViewDelegate
 - (void)changeSliderValue:(CGFloat)value
 {
     [MusicManager shareManager].sliderValue = value;
@@ -115,6 +128,13 @@
     [[MusicManager shareManager] playPrevious];
 }
 
+- (void)dissmiss
+{
+    [self dismissViewControllerAnimated:YES completion:^{}];
+    if (self.getCurrentPlayDataBlock) {
+        self.getCurrentPlayDataBlock();
+    }
+}
 
 
 
