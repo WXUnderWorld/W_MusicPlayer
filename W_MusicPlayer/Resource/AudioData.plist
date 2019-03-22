@@ -4,6 +4,20 @@
 <array>
 	<dict>
 		<key>audioUrl</key>
+		<string>http://www.170mv.com/kw/other.web.rf01.sycdn.kuwo.cn/resource/n3/72/86/4037008982.mp3</string>
+		<key>audioName</key>
+		<string>可惜没如果</string>
+		<key>audioSinger</key>
+		<string>林俊杰</string>
+		<key>audioImage</key>
+		<string>https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike272%2C5%2C5%2C272%2C90/sign=e8f8ad0fba014a9095334eefc81e5277/a8014c086e061d95fc94258578f40ad163d9cab9.jpg</string>
+		<key>audioLyric</key>
+		<string>可惜没如果.lrc</string>
+		<key>audioAlbum</key>
+		<string>新地球</string>
+	</dict>
+	<dict>
+		<key>audioUrl</key>
 		<string>http://mpge.5nd.com/2007/h/20075225298269/52989152.mp3</string>
 		<key>audioName</key>
 		<string>老人与海</string>
@@ -235,8 +249,8 @@
 		<string>http://star.kuwo.cn/star/starheads/180/44/10/3787691319.jpg</string>
 		<key>audioAlbum</key>
 		<string>不想放手</string>
-        <key>audioLyric</key>
-        <string>不要说话.lrc</string>
+		<key>audioLyric</key>
+		<string>不要说话.lrc</string>
 	</dict>
 	<dict>
 		<key>audioUrl</key>
@@ -286,7 +300,7 @@
 		<key>audioAlbum</key>
 		<string>小黄</string>
 		<key>audioLyric</key>
-		<string></string>
+		<string>老街.lrc</string>
 	</dict>
 	<dict>
 		<key>audioUrl</key>

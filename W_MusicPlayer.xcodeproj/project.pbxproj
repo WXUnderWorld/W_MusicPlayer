@@ -56,6 +56,8 @@
 		9B5C01562232612B00FC8015 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5C01552232612B00FC8015 /* main.m */; };
 		9BA9A85B2240CCCC0010E805 /* AnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA9A85A2240CCCC0010E805 /* AnimationManager.m */; };
 		9BA9A85E2240D8790010E805 /* ShakeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA9A85D2240D8790010E805 /* ShakeView.m */; };
+		9BAFEDF7224364BB00E2D9DE /* 可惜没如果.lrc in Resources */ = {isa = PBXBuildFile; fileRef = 9BAFEDF6224364BB00E2D9DE /* 可惜没如果.lrc */; };
+		9BAFEDF92243695D00E2D9DE /* 老街.lrc in Resources */ = {isa = PBXBuildFile; fileRef = 9BAFEDF82243695D00E2D9DE /* 老街.lrc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +130,8 @@
 		9BA9A85A2240CCCC0010E805 /* AnimationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnimationManager.m; sourceTree = "<group>"; };
 		9BA9A85C2240D8790010E805 /* ShakeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShakeView.h; sourceTree = "<group>"; };
 		9BA9A85D2240D8790010E805 /* ShakeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShakeView.m; sourceTree = "<group>"; };
+		9BAFEDF6224364BB00E2D9DE /* 可惜没如果.lrc */ = {isa = PBXFileReference; lastKnownFileType = text; path = "可惜没如果.lrc"; sourceTree = "<group>"; };
+		9BAFEDF82243695D00E2D9DE /* 老街.lrc */ = {isa = PBXFileReference; lastKnownFileType = text; path = "老街.lrc"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				9B3E08ED223B9BA6002E2A5F /* 不要说话.lrc */,
+				9BAFEDF6224364BB00E2D9DE /* 可惜没如果.lrc */,
 				9B3E08E1223B91F4002E2A5F /* 爱如潮水.lrc */,
 				9B3E08E5223B91F4002E2A5F /* 白狐.lrc */,
 				9B3E08E4223B91F4002E2A5F /* 老人与海.lrc */,
@@ -230,6 +235,7 @@
 				9B3E08E3223B91F4002E2A5F /* 天使的翅膀.lrc */,
 				9B479F2D2236505000588A6E /* 王若琳-迷宫.lrc */,
 				9B479F2E2236505000588A6E /* 周渝民-记得我爱你.lrc */,
+				9BAFEDF82243695D00E2D9DE /* 老街.lrc */,
 				9B479F2F2236505000588A6E /* Dragon Pig-全部都是你.lrc */,
 				9B479F302236505000588A6E /* 刘依朵-醉红颜.lrc */,
 				9B479F312236505000588A6E /* 许嵩(Vae)-有何不可.lrc */,
@@ -404,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B479F552236505000588A6E /* 陈冠希-战争.mp3 in Resources */,
+				9BAFEDF7224364BB00E2D9DE /* 可惜没如果.lrc in Resources */,
 				9B479F472236505000588A6E /* 周渝民-记得我爱你.lrc in Resources */,
 				9B3E08EC223B91F4002E2A5F /* 白狐.lrc in Resources */,
 				9B479F562236505000588A6E /* Flo Rida-Can't Believe It.mp3 in Resources */,
@@ -423,6 +430,7 @@
 				9B479F532236505000588A6E /* Frankmusik-Wrecking Ball.mp3 in Resources */,
 				9B479F482236505000588A6E /* Dragon Pig-全部都是你.lrc in Resources */,
 				9B479F4C2236505000588A6E /* 音阙诗听-红昭愿.lrc in Resources */,
+				9BAFEDF92243695D00E2D9DE /* 老街.lrc in Resources */,
 				9B5C01502232612B00FC8015 /* Assets.xcassets in Resources */,
 				9B479F4E2236505000588A6E /* ihoudf-dfplayer.lrc in Resources */,
 				9B479F4F2236505000588A6E /* 权志龙-MISSING YOU.lrc in Resources */,
