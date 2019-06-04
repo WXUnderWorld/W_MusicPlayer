@@ -65,9 +65,9 @@
         MusicLrcModel *model = self.lrcArray[indexPath.row];
         cell.lrcLabel.text = model.lrcText;
         if (indexPath.row == self.currentIndex) {
-            cell.selected = YES;
+            cell.isSelected = YES;
         }else{
-            cell.selected = NO;
+            cell.isSelected = NO;
         }
     }else{
         cell.lrcLabel.text = @"暂无歌词";
@@ -125,9 +125,9 @@
                 LrcTableViewCell *previousCell = [self.lrcTableView cellForRowAtIndexPath:previousIndexPath];
                 
                 //设置当前行的状态
-                currentCell.selected = YES;
+                currentCell.isSelected = YES;
                 //取消上一行的选中状态
-                previousCell.selected = NO;
+                previousCell.isSelected = NO;
 
                 [self.lrcTableView scrollToRowAtIndexPath:currentIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
              

@@ -22,10 +22,11 @@
     return cell;
 }
 
-- (void)setSelected:(BOOL)selected
+
+- (void)setIsSelected:(BOOL)isSelected
 {
-    if (selected) {
-        _lrcLabel.font = [UIFont systemFontOfSize:18];
+    if (isSelected) {
+         _lrcLabel.font = [UIFont systemFontOfSize:18];
     }else{
         _lrcLabel.font = [UIFont systemFontOfSize:15];
         _lrcLabel.progress = 0;
