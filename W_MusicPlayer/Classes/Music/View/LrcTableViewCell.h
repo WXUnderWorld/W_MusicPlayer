@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)lrcCellWithTableView:(UITableView *)tableView;
 
-@property (nonatomic,assign) BOOL selected;
+@property (nonatomic,assign) BOOL isSelected;
 
 @end
 
